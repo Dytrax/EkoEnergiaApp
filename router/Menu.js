@@ -24,7 +24,7 @@ import Solicitudes from './Solicitudes/Root'
 import Tomas from './Tomas/Root'
 
 
-const CustomDrawerContentComponent = (props) => {
+const CustomDrawerContentComponent = (props) => { 
   
   return (
     <Container >

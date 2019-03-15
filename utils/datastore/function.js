@@ -1,5 +1,6 @@
 import { AsyncStorage } from "react-native"
 class DB{
+  
     async store (key,val)  {
         try {
           await AsyncStorage.setItem(key, val);
@@ -7,7 +8,8 @@ class DB{
           console.log(error)
         }
       }
-     async getData(key) {
+
+    async getData(key) {
         try {
           
           const value = await AsyncStorage.getItem(key);
@@ -18,6 +20,16 @@ class DB{
          } catch (error) {
            console.log(error)
          }
+      }
+
+    async removeItemValue(key) {
+        try {
+          await AsyncStorage.removeItem(key);
+          return true;
+        }
+        catch(exception) {
+          return false;
+        }
       }
 }
 

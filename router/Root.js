@@ -3,7 +3,7 @@ import LoginScreen from "../src/components/Login/Login"
 import RecuperarScreen from "../src/components/Login/Recuperar"
 import Color from '../config/color'
 import Menu from "./Menu";
-
+import MenuV2 from './MenuV2'
 const Root = createStackNavigator(
   {
     Login: {screen:LoginScreen,
@@ -24,7 +24,7 @@ const Root = createStackNavigator(
                   }
                 },
     Menu: { 
-        screen:Menu,
+        screen:MenuV2,
         navigationOptions:{
           header: null,
           gesturesEnabled: false
