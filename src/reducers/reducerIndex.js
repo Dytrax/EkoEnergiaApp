@@ -3,6 +3,7 @@ import permisosReducers from './permisosReducers'
 import user from './userLoginReducer'
 import typeSolicitud from './userSolicitudReducer'
 import contrato from './userSolicitudContratoReducer'
+import medidor from './userMedidorTFreducer'
 const data = [
     {
         "superhero":"Batman", 
@@ -150,4 +151,5 @@ export default combineReducers({
     user ,
     typeSolicitud,
     contrato,
+    medidor
 })

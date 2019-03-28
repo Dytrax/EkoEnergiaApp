@@ -68,7 +68,7 @@ const TabRootSolicitudes = createBottomTabNavigator({
                         }
                     },
             
-                    tabBarIcon: ({tintColor}) => (
+                    /* tabBarIcon: ({tintColor}) => (
                         
                             <AbiertasIcon
                             name="issue-opened"
@@ -76,7 +76,7 @@ const TabRootSolicitudes = createBottomTabNavigator({
                             size={20}
                             />
 
-                            )
+                            ) */
                 }
             
             },
@@ -106,7 +106,7 @@ const TabRootSolicitudes = createBottomTabNavigator({
                 }
             },
     
-            tabBarIcon: ({tintColor}) => (
+            /* tabBarIcon: ({tintColor}) => (
                 
                     <CerradasIcon
                     name="issue-closed"
@@ -114,7 +114,7 @@ const TabRootSolicitudes = createBottomTabNavigator({
                     size={20}
                     />
 
-                    )
+                    ) */
         }    
     },
     

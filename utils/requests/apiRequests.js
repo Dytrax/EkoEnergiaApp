@@ -4,6 +4,9 @@ import Moment from 'moment';
 const URL_SOLICITUDES = `${CONFIG.URL_BASE}:${CONFIG.PORT_CRM}/${CONFIG.VERSION_API}/pqr/pqrs`
 const URL_TIPO_SOLICITUD = `${CONFIG.URL_BASE}:${CONFIG.PORT_7001}/${CONFIG.VERSION_API_EKOSAVE}/clients/data-empresa?module=27&permission=0&data=clasesproceso`
 const URL_CONTRATOS = `${CONFIG.URL_BASE}:${CONFIG.PORT_7001}/${CONFIG.VERSION_API_EKOSAVE}/clients/measurers/contracts`
+const URL_NOTIFICACIONES = `${CONFIG.URL_BASE}:${CONFIG.PORT_7001}/${CONFIG.VERSION_API_EKOSAVE}/clients/notifications`
+const URL_MEDIDORES = `${CONFIG.URL_BASE}:${CONFIG.PORT_7001}/${CONFIG.VERSION_API_EKOSAVE}/clients/measurers`
+const URL_TARIFAS_APLICADAS = `${CONFIG.URL_BASE}:${CONFIG.PORT_7001}/${CONFIG.VERSION_API_EKOSAVE}/clients/data-empresa?`
 class apiRequests{
 
   async getList(){
@@ -20,6 +23,47 @@ class apiRequests{
         })
         let responseJson = await query.json()
         
+        return [ query.status,responseJson]
+
+    }catch(error){
+      console.error(error)
+    } 
+  }
+
+  async getTarifasAplicadas(contract,module,permission,fecha){
+    try{
+    
+    const query = await fetch(URL_TARIFAS_APLICADAS+"contract="+contract+"&module="+module+"&permission="+permission+"&data=tarifa&fechaIni="+fecha+"&fechaFin=",{  
+          method: 'GET', 
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization':'Bearer '+ await DB.getData('token'),
+          },
+        
+        })
+        let responseJson = await query.json()
+        
+        return [ query.status,responseJson]
+
+    }catch(error){
+      console.error(error)
+    } 
+  }
+  
+  async getListMedidores(){
+    try{
+    
+    const query = await fetch(URL_MEDIDORES ,{  
+          method: 'GET', 
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization':'Bearer '+ await DB.getData('token'),
+          },
+        
+        })
+        let responseJson = await query.json()
         return [ query.status,responseJson]
 
     }catch(error){
@@ -67,6 +111,26 @@ class apiRequests{
     } 
   }
 
+  async getListNotificaciones(){
+    try{
+    
+    const query = await fetch(URL_NOTIFICACIONES ,{  
+          method: 'GET', 
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization':'Bearer '+ await DB.getData('token'),
+          },
+        
+        })
+        let responseJson = await query.json()
+        return [ query.status,responseJson]
+
+    }catch(error){
+      console.error(error)
+    } 
+  }
+
   
 
   async create(titulo,descripcion){
@@ -91,6 +155,26 @@ class apiRequests{
         })
         let responseJson = await query.json()
         console.log(query.status)
+        return [ query.status,responseJson]
+
+    }catch(error){
+      console.error(error)
+    } 
+  }
+
+  async getMedidoresDataFacturacion(){
+    try{
+    
+    const query = await fetch(URL_MEDIDORES + '/data' ,{  
+          method: 'GET', 
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization':'Bearer '+ await DB.getData('token'),
+          },
+        
+        })
+        let responseJson = await query.json()
         return [ query.status,responseJson]
 
     }catch(error){

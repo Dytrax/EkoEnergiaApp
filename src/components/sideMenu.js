@@ -6,7 +6,8 @@ import {
     SafeAreaView,
     ImageBackground,
     Image,
-    TouchableHighlight
+    TouchableHighlight,
+    DatePickerIOS
 } from 'react-native'
 import SolicitudesIcon from "react-native-vector-icons/MaterialIcons";
 import Fondo from '../../src/assents/img/icon_menu/imgSideMenu.jpg'
@@ -19,11 +20,14 @@ class SideMenu extends Component {
             dashboardTab : 0
         }
     }
-    componentWillMount(){
+    /* componentWillMount(){
         console.log("Side Menu Start")
-    }
+    } */
     controlTabNavigator = (route,number) => {
-   
+        console.log("Ruta")
+        console.log(route)
+        console.log("Numero")
+        console.log(number)
         this.props.navigation.navigate(route);
         this.props.navigation.closeDrawer()
         this.setState({
@@ -67,6 +71,55 @@ class SideMenu extends Component {
                                         </View>
                                 </View>
                             </TouchableHighlight>
+                            <TouchableHighlight style={[styles.tabTouchableStyle,[styles.offTab, this.state.dashboardTab===2 && styles.onTab]]}
+                                onPress={() => {this.controlTabNavigator('TarifasAplicadas', 2)}}
+                                underlayColor = {Color.underlayColorTab}
+                            >
+                                <View style={styles.tabContainer}>
+                                        <View style={{width:"30%", justifyContent:"center", alignItems:"center",}}>
+                                            <SolicitudesIcon name={"question-answer"} size={30} 
+                                            //style={{alignSelf:"center"}}
+                                                color="white"
+                                            />
+                                        </View>
+                                        <View style={{width:"70%", justifyContent:"center",}}>
+                                            <Text style={{fontSize:16,fontWeight:"bold", color:"white"}} >Tarifas Aplicadas</Text>
+                                        </View>
+                                </View>
+                            </TouchableHighlight>
+                            <TouchableHighlight style={[styles.tabTouchableStyle,[styles.offTab, this.state.dashboardTab===1 && styles.onTab]]}
+                                onPress={() => {this.controlTabNavigator('Notificaciones', 1)}}
+                                underlayColor = {Color.underlayColorTab}
+                            >
+                                <View style={styles.tabContainer}>
+                                        <View style={{width:"30%", justifyContent:"center", alignItems:"center",}}>
+                                            <SolicitudesIcon name={"question-answer"} size={30} 
+                                            //style={{alignSelf:"center"}}
+                                                color="white"
+                                            />
+                                        </View>
+                                        <View style={{width:"70%", justifyContent:"center",}}>
+                                            <Text style={{fontSize:16,fontWeight:"bold", color:"white"}} >Notificaciones</Text>
+                                        </View>
+                                </View>
+                            </TouchableHighlight>
+                            <TouchableHighlight style={[styles.tabTouchableStyle,[styles.offTab, this.state.dashboardTab===3 && styles.onTab]]}
+                                onPress={() => {this.controlTabNavigator('MedidoresTab', 3)}}
+                                underlayColor = {Color.underlayColorTab}
+                            >
+                                <View style={styles.tabContainer}>
+                                        <View style={{width:"30%", justifyContent:"center", alignItems:"center",}}>
+                                            <SolicitudesIcon name={"question-answer"} size={30} 
+                                            //style={{alignSelf:"center"}}
+                                                color="white"
+                                            />
+                                        </View>
+                                        <View style={{width:"70%", justifyContent:"center",}}>
+                                            <Text style={{fontSize:16,fontWeight:"bold", color:"white"}} >Medidores</Text>
+                                        </View>
+                                </View>
+                            </TouchableHighlight>
+                            
                             {/* <TouchableHighlightComponent style={[styles.tabContainer]} 
                             
                             onPress = {() =>  {controlTabNavigator('Solicitudes2',1)}}
