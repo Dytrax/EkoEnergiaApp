@@ -12,6 +12,7 @@
     "react": "16.6.0-alpha.8af6728",
     "react-native": "0.57.3",
     "react-native-dropdownalert": "^3.7.0",
+    "react-native-echarts-wrapper": "^1.2.2",
     "react-native-elements": "^1.1.0",
     "react-native-flash-message": "^0.1.11",
     "react-native-linear-gradient": "^2.4.2",

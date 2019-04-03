@@ -35,7 +35,10 @@ import PureChart from 'react-native-pure-chart';
                     {x: '2018-02-02', y: 200},
                     {x: '2018-02-03', y: 170},
                     {x: '2018-02-04', y: 250},
-                    {x: '2018-02-05', y: 10}
+                    {x: '2018-02-05', y: 10},
+                    {x: '2018-02-06', y: 140},
+                    {x: '2018-02-07', y: 550},
+                    {x: '2018-02-08', y: 40}
                 ],
                 color: '#297AB1'
                 },
@@ -46,7 +49,10 @@ import PureChart from 'react-native-pure-chart';
                     {x: '2018-02-02', y: 100},
                     {x: '2018-02-03', y: 140},
                     {x: '2018-02-04', y: 550},
-                    {x: '2018-02-05', y: 40}
+                    {x: '2018-02-05', y: 40},
+                    {x: '2018-02-06', y: 140},
+                    {x: '2018-02-07', y: 550},
+                    {x: '2018-02-08', y: 40}
                 ],
                 color: 'yellow'
                 }
@@ -59,7 +65,7 @@ import PureChart from 'react-native-pure-chart';
                 <CustomHeader title="Indicadores"  porcentaje="13%" actionEvent={() => this.props.navigation.openDrawer()} ></CustomHeader>
                 <Content contentContainerStyle={{flex:1,alignItems:'center',justifyContent:'center'}}>
                 
-                    <View style={{width:'100%',height:70,backgroundColor:'#81818130'}}>
+                    {/* <View style={{width:'100%',height:70,backgroundColor:'#81818130'}}>
                         <View style={{flex: 1, flexDirection: 'row'}}>
                             <View style={{width: "60%", height: 70}} >
                                 <Text style={{paddingTop:"8%",marginLeft:35,fontSize: 20}}>
@@ -73,15 +79,16 @@ import PureChart from 'react-native-pure-chart';
                                 />
                             </View>
                         </View>
-                     </View>
+                     </View> */}
 
                      
                 <ScrollView style={{flex:1,width:'100%',padding:15}}> 
-                    <Card style={{marginTop:30}}>
+                    <PureChart data={sampleData} type='line'  />
+                    {/* <Card style={{marginTop:30}}>
                         <View style={{marginTop:20,justifyContent: 'center',alignItems: 'center'}}>
-                        <PureChart data={sampleData} type='line'  />
+                        
                         </View>
-                    </Card>
+                    </Card> */}
                 </ScrollView>
                   
                  

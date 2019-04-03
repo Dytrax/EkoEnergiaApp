@@ -77,51 +77,53 @@ import LinearGradient from 'react-native-linear-gradient';
                     
                     <ScrollView style={{flex:1,width:'100%',}}> 
                     <LinearGradient
-                        colors={['#F0A517', '#F0A517', '#F1BC59']}
+                        
+                        colors={['#FFF', '#FFF']}
                         start={{x: 0.0, y: 1.0}} end={{x: 1.0, y: 1.0}}
-                        style={[styles.sombra,{marginBottom:10,padding:10}]}
-                        > 
+                        style={[styles.sombra,{marginBottom:10,}]}
 
-                    
+                        > 
+                            <View style={{flexDirection:"row",flex:1,borderWidth:1,borderColor:"#EC8623",padding:10,marginBottom:5}}>
+                                        <View style={{flex:1,alignSelf:"flex-start"}}>
+                                            <Text style={{color:Color.primary,fontWeight:"bold", fontSize:16,}}>Consumo kWh</Text>
+                                        </View>
+                                        
+                                        <View style={{flex:1}}>
+                                            <Text style={{color:"black",fontWeight:"bold", fontSize:16,alignSelf:"flex-end"}}>{`${new Intl.NumberFormat().format(dataTA.consumo)}`}</Text>
+                                        </View>
+                                        
+                                        {/* <Text style={{color:Color.red,fontSize:15}}>{`Desviacion `}</Text> */}                           
+                                
+                            </View>
+                          
                        
-                        <View style={{flexDirection:"row",flex:1}}>
-                                    <View style={{flex:1,alignSelf:"flex-start"}}>
-                                        <Text style={{color:'white',fontWeight:"bold", fontSize:16,}}>Consumo kWh</Text>
-                                    </View>
-                                    
-                                    <View style={{flex:1}}>
-                                        <Text style={{color:'white',fontWeight:"bold", fontSize:16,alignSelf:"flex-end"}}>{`${new Intl.NumberFormat().format(dataTA.consumo)}`}</Text>
-                                    </View>
-                                    
-                                    {/* <Text style={{color:Color.red,fontSize:15}}>{`Desviacion `}</Text> */}                           
-                            
-                        </View>
+                       
                     
                     </LinearGradient>
 
                     <LinearGradient
-                        colors={['#00ADF9', '#00ADF9', '#00ADF9']}
+                        colors={['#FFF', '#FFF']}
                         start={{x: 0.0, y: 1.0}} end={{x: 1.0, y: 1.0}}
                         style={[styles.sombra,{marginBottom:10,}]}
                         > 
 
                     
-                        <View style={[{padding:10,marginBottom:5}]}>
+                        <View style={[{padding:10,marginBottom:5,borderWidth:1,borderColor:'#33C1D7',}]}>
                         
                                 
-                                    <Text style={{color:'white',fontWeight:"bold", fontSize:16,}}>Generación y comercialización</Text>
+                                    <Text style={{color:'#33C1D7',fontWeight:"bold", fontSize:16,}}>Generación y comercialización</Text>
                                     {/* <Text style={{color:Color.red,fontSize:15}}>{`Desviacion `}</Text> */}
                                 
                                 
                                 
                                 <View style={{flexDirection:"row",marginTop:10}}>
                                     <View style={{justifyContent:"center",alignItems:"center",flex:1,}}>
-                                        <Text style={{color:"white",fontWeight:"800"}}>{`$${new Intl.NumberFormat().format(dataTA.compra)}`}</Text>
-                                        <Text style={{color:"white",fontWeight:"800"}}>Tarifa</Text>
+                                        <Text style={{color:"black",fontWeight:"800"}}>{`$${new Intl.NumberFormat().format(dataTA.compra)}`}</Text>
+                                        <Text style={{color:'#33C1D7',fontWeight:"800"}}>Tarifa</Text>
                                     </View>
                                     <View style={{justifyContent:"center",alignItems:"center",flex:1}}>
-                                        <Text style={{color:"white",fontWeight:"800"}}>{`$${new Intl.NumberFormat().format(dataTA.tComponenteG)}`}</Text>
-                                        <Text style={{color:"white",fontWeight:"800"}}>Total</Text>
+                                        <Text style={{color:"black",fontWeight:"800"}}>{`$${new Intl.NumberFormat().format(dataTA.tComponenteG)}`}</Text>
+                                        <Text style={{color:'#33C1D7',fontWeight:"800"}}>Total</Text>
                                     </View>
                                 </View>
                                
@@ -131,11 +133,11 @@ import LinearGradient from 'react-native-linear-gradient';
                         </View>
                     </LinearGradient>
                     <LinearGradient
-                        colors={['#949FB1', '#949FB1', '#949FB1']}
+                        colors={['#FFF', '#FFF', '#FFF']}
                         start={{x: 0.0, y: 1.0}} end={{x: 1.0, y: 1.0}}
                         style={[styles.sombra,{marginBottom:10}]}
                         > 
-                        <View style={[{padding:10,marginBottom:5}]}>
+                        <View style={[{padding:10,marginBottom:5,borderWidth:1,borderColor:"#EC8623"}]}>
                                 
                                     <Text style={{color:'white',fontWeight:"bold", fontSize:16,}}>Transmision</Text>
                                 <View style={{flexDirection:"row",marginTop:10}}>
@@ -152,7 +154,7 @@ import LinearGradient from 'react-native-linear-gradient';
                         </View>
                     </LinearGradient>
                     <LinearGradient
-                        colors={["rgb(247, 70, 74)", "rgb(247, 70, 74)", "rgb(247, 70, 74)"]}
+                        colors={['#00ADF9', '#00ADF9', '#00ADF9']}
                         start={{x: 0.0, y: 1.0}} end={{x: 1.0, y: 1.0}}
                         style={[styles.sombra,{marginBottom:10}]}
                         > 
@@ -194,7 +196,7 @@ import LinearGradient from 'react-native-linear-gradient';
                         </View>
                     </LinearGradient>
                     <LinearGradient
-                        colors={['#FDB45C', '#FDB45C', '#FDB45C']}
+                        colors={['#F0A517', '#F0A517', '#F1BC59']}
                         start={{x: 0.0, y: 1.0}} end={{x: 1.0, y: 1.0}}
                         style={[styles.sombra,{marginBottom:10}]}
                         > 
@@ -271,7 +273,8 @@ const styles = StyleSheet.create({
         borderColor: '#ddd',
         borderBottomWidth: 0,
        
-    }
+    },
+    
 })
 
 export default ConsultaTA; 

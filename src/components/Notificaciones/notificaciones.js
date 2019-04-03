@@ -5,7 +5,11 @@ import SearchBar from 'react-native-searchbar';
 import CustomHeader from '../layouts/CustomHeader'
 import Color from '../../../config/color'
 import API from  '../../../utils/requests/apiRequests'
-import moment from "moment";
+import moment from 'moment' 
+import Bell from 'react-native-vector-icons/MaterialCommunityIcons';
+
+var localLocale = moment();
+moment.locale('es');
 
 
  class Notificaciones extends Component{
@@ -45,30 +49,48 @@ import moment from "moment";
     
 
     renderItem = ({item}) =>{
-        console.log(item.dateNotification)
+        let color = ""
+        if (item.color === "#F7112D"){
+
+             color = "#C1282D"
+        }else{
+            color = item.color
+        }
+       
         return(
-        <TouchableOpacity 
-        >
-        <View style={[{backgroundColor:"white",padding:10,marginBottom:5},styles.sombra]}>
-        <View style={{alignSelf:"flex-start",}}>
+        
+        <View style={[{backgroundColor:"white",marginBottom:10},styles.sombra]}>
+           <View style={{marginBottom:10,marginTop:10}}>
+                <Text style={{color:'rgb(133,133,133)',fontSize:16,marginLeft:10, fontWeight:"bold"}}>{`Medidor  ${item.measurerCode}`}</Text>
+          </View>
+        
+
+            <View style={{flexDirection:"row",alignItems:"center",backgroundColor:color, padding:5}}>
+                <Bell name="bell-ring-outline" size={25} color="white"/>
+                <View>
+                     <Text style={{color:"white",fontSize:14,marginLeft:10, fontWeight:"900"}}>{`Desviación  ${Math.trunc(item.percentage)} %`}</Text>
+                    <Text style={{color:"white",fontSize:14,marginLeft:10, fontWeight:"900"}}>{`${ moment(item.dateNotification.slice(0, 10)).format("MMMM DD YYYY, h:mm:ss a")}`}</Text>
+                </View>
+            </View>
+        <View style={{alignSelf:"flex-start",padding:10,}}>
                 
-                    <Text style={{color:'rgb(99,99,99)',fontWeight:"bold", fontSize:16,}}>{`Medidor #${item.measurerCode}`}</Text>
-                    <Text style={{color:item.color,fontSize:15}}>{`Desviacion ${item.percentage}%`}</Text>
+                    {/* <Text style={{color:'rgb(99,99,99)',fontWeight:"bold", fontSize:16,}}>{`Medidor #${item.measurerCode}`}</Text>
+                    <Text style={{color:item.color,fontSize:15}}>{`Desviacion ${item.percentage}%`}</Text> */}
                 
                 
                 
                 <View style={{marginTop:10,marginBottom:10}}>
-                <Text style={{color:'rgb(99,99,99)', fontSize:15,}}>{`${item.message}`}</Text>
+                <Text style={{color:'rgb(133,133,133)', fontSize:15,}}>{`${item.message}`}</Text>
                 </View>
-                <View style={{alignSelf:"flex-end"}}>
-                    <Text style={{color:'rgb(133,133,133)',fontSize:12,}}>{`${item.origin} - ${ moment(item.dateNotification.slice(0, 10)).format("MMMM Do YYYY, h:mm:ss a")}`}</Text>
+                {/* <View style={{alignSelf:"flex-end"}}>
+                    <Text style={{color:'rgb(133,133,133)',fontSize:12,}}>{`${item.origin} - ${ moment(item.dateNotification.slice(0, 10)).format("MMMM DD YYYY, h:mm:ss a")}`}</Text>
                 </View>
-                <View style={{borderBottomColor: item.color,borderBottomWidth: 1,marginTop:5}}/>
+                <View style={{borderBottomColor: item.color,borderBottomWidth: 1,marginTop:5}}/> */}
             
         </View>
     
         </View>
-        </TouchableOpacity>
+       
         )
     }
     
@@ -101,7 +123,7 @@ import moment from "moment";
                     searchBar:true
                 })}  
                 ></CustomHeader>
-                <Content contentContainerStyle={{flex:1,padding:5
+                <Content contentContainerStyle={{flex:1,padding:10,paddingTop:5,marginBottom:5
                 }}
                 >
                     
@@ -163,7 +185,7 @@ const styles = StyleSheet.create({
         //backgroundColor: '#fff', 
         elevation: 2,
         borderWidth: 1,
-        borderRadius: 2,
+        borderRadius: 8,
         borderColor: '#ddd',
         borderBottomWidth: 0,
         /* shadowColor: '#000',

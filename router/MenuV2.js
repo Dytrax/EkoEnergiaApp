@@ -5,6 +5,8 @@ import NotificacionesRoot from './Notificaciones/RootNotificaciones'
 import TF from './Reportes/Reportes'
 import TarifasAplicadas from '../src/components/Reportes/tarifasAplicadas'
 import MedidoresRoot from './Medidores/RootMedidores'
+import graficaEjemploUno from '../src/components/Indicadores/Indicadores'
+import GraficaDos from "../src/components/Indicadores/graficados";
 const MyDrawer = createDrawerNavigator({
   Solicitudes:{
     screen:SolicitudesRoot
@@ -17,6 +19,12 @@ const MyDrawer = createDrawerNavigator({
   },
   MedidoresTab:{
     screen:MedidoresRoot
+  },
+  EjemploGraficaUno:{
+    screen:graficaEjemploUno
+  },
+  EjemploGraficaDos:{
+    screen:GraficaDos
   }
 
   /* Solicitudes2:{

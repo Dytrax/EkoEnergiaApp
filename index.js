@@ -5,6 +5,7 @@ import Splash from './src/components/Splash/Splash';
 
 import {name as appName} from './app.json';
 
+//localLocale.locale(false);
 class Main extends Component{
 
     constructor(props){

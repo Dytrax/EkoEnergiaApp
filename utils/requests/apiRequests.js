@@ -7,6 +7,9 @@ const URL_CONTRATOS = `${CONFIG.URL_BASE}:${CONFIG.PORT_7001}/${CONFIG.VERSION_A
 const URL_NOTIFICACIONES = `${CONFIG.URL_BASE}:${CONFIG.PORT_7001}/${CONFIG.VERSION_API_EKOSAVE}/clients/notifications`
 const URL_MEDIDORES = `${CONFIG.URL_BASE}:${CONFIG.PORT_7001}/${CONFIG.VERSION_API_EKOSAVE}/clients/measurers`
 const URL_TARIFAS_APLICADAS = `${CONFIG.URL_BASE}:${CONFIG.PORT_7001}/${CONFIG.VERSION_API_EKOSAVE}/clients/data-empresa?`
+const URL_DETALLE_FACTURACION = `${CONFIG.URL_BASE}:${CONFIG.PORT_7001}/${CONFIG.VERSION_API_EKOSAVE}/clients/data-empresa?`
+const URL_HISTORICOS = `${CONFIG.URL_BASE}:${CONFIG.PORT_7001}/${CONFIG.VERSION_API_EKOSAVE}/clients/data-empresa?`
+
 class apiRequests{
 
   async getList(){
@@ -133,12 +136,12 @@ class apiRequests{
 
   
 
-  async create(titulo,descripcion){
+  async create(titulo,descripcion,codigo,contrato){
 
-    console.log(titulo+" "+descripcion)
+   
     try{
-     // POST	7002		/v1/pqr/pqrs	
-          const query = await fetch(Config.base_url+Config.port_request+Config.v1_api+'pqr/pqrs' ,{  
+     
+          const query = await fetch( URL_SOLICITUDES,{  
           method: 'POST', 
           headers: {
             'Accept': 'application/json',
@@ -146,9 +149,13 @@ class apiRequests{
             'Authorization':'Bearer '+ await DB.getData('token'),
           },
           body: JSON.stringify({
-            title: titulo,
+            codigo:codigo,
+            contract:contrato,
+            dateInit:Moment().format(),
             description: descripcion,
-            dateInit:Moment().format()
+            title: titulo,
+            
+            
             
           })
       
@@ -166,6 +173,46 @@ class apiRequests{
     try{
     
     const query = await fetch(URL_MEDIDORES + '/data' ,{  
+          method: 'GET', 
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization':'Bearer '+ await DB.getData('token'),
+          },
+        
+        })
+        let responseJson = await query.json()
+        return [ query.status,responseJson]
+
+    }catch(error){
+      console.error(error)
+    } 
+  }
+
+  async getDetalleFacturacion(contract){
+    try{
+    
+    const query = await fetch(URL_DETALLE_FACTURACION + 'contract='+contract+'&module=12&permission=125&meses=6&data=facturas' ,{  
+          method: 'GET', 
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization':'Bearer '+ await DB.getData('token'),
+          },
+        
+        })
+        let responseJson = await query.json()
+        return [ query.status,responseJson]
+
+    }catch(error){
+      console.error(error)
+    } 
+  }
+
+  async getHistoricos(contract){
+    try{
+    
+    const query = await fetch(URL_HISTORICOS + 'contract='+contract+'&module=12&permission=125&meses=6&data=historico' ,{  
           method: 'GET', 
           headers: {
             'Accept': 'application/json',

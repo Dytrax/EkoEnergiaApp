@@ -119,6 +119,38 @@ class SideMenu extends Component {
                                         </View>
                                 </View>
                             </TouchableHighlight>
+                            <TouchableHighlight style={[styles.tabTouchableStyle,[styles.offTab, this.state.dashboardTab===4 && styles.onTab]]}
+                                onPress={() => {this.controlTabNavigator('EjemploGraficaUno', 4)}}
+                                underlayColor = {Color.underlayColorTab}
+                            >
+                                <View style={styles.tabContainer}>
+                                        <View style={{width:"30%", justifyContent:"center", alignItems:"center",}}>
+                                            <SolicitudesIcon name={"question-answer"} size={30} 
+                                            //style={{alignSelf:"center"}}
+                                                color="white"
+                                            />
+                                        </View>
+                                        <View style={{width:"70%", justifyContent:"center",}}>
+                                            <Text style={{fontSize:16,fontWeight:"bold", color:"white"}} >Ejemplo Grafica Uno</Text>
+                                        </View>
+                                </View>
+                            </TouchableHighlight>
+                            <TouchableHighlight style={[styles.tabTouchableStyle,[styles.offTab, this.state.dashboardTab===5 && styles.onTab]]}
+                                onPress={() => {this.controlTabNavigator('EjemploGraficaDos', 5)}}
+                                underlayColor = {Color.underlayColorTab}
+                            >
+                                <View style={styles.tabContainer}>
+                                        <View style={{width:"30%", justifyContent:"center", alignItems:"center",}}>
+                                            <SolicitudesIcon name={"question-answer"} size={30} 
+                                            //style={{alignSelf:"center"}}
+                                                color="white"
+                                            />
+                                        </View>
+                                        <View style={{width:"70%", justifyContent:"center",}}>
+                                            <Text style={{fontSize:16,fontWeight:"bold", color:"white"}} >Ejemplo Grafica Dos</Text>
+                                        </View>
+                                </View>
+                            </TouchableHighlight>
                             
                             {/* <TouchableHighlightComponent style={[styles.tabContainer]} 
                             

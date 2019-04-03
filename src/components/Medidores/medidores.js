@@ -5,6 +5,12 @@ import SearchBar from 'react-native-searchbar';
 import CustomHeader from '../layouts/CustomHeader'
 import Color from '../../../config/color'
 import API from  '../../../utils/requests/apiRequests'
+import Date from 'react-native-vector-icons/MaterialIcons';
+import Location from 'react-native-vector-icons/EvilIcons';
+import Energy from 'react-native-vector-icons/SimpleLineIcons';
+import Next from 'react-native-vector-icons/Ionicons';
+import Value from 'react-native-vector-icons/Entypo';
+import Loader from '../loader'
 import moment from "moment";
 
 
@@ -16,6 +22,7 @@ import moment from "moment";
             data:[],
             copyData:[],
             searchBar:false,
+            modalLoading:false
             
         }
         this._handleResults = this._handleResults.bind(this);
@@ -34,7 +41,12 @@ import moment from "moment";
       
      componentDidMount = async () =>{
         let Medidores = await API.getMedidoresDataFacturacion()
-        console.log(Medidores)
+        if (Medidores[0]===200){
+            this.setState({
+                data:Medidores[1]
+            })
+            console.log(Medidores[1])
+        }
     }
 
     
@@ -45,30 +57,70 @@ import moment from "moment";
         this.state[stateToChange] = value;
         console.log(this.state)
     };
+
+    goToDetallesFacturación = async (item) =>{
+        this.setState({
+            modalLoading:true
+        })
+        let detalle_factura = await API.getDetalleFacturacion(item.contractNumber)
+        let historicos = await API.getHistoricos(item.contractNumber)
+        if (detalle_factura[0]===200 && historicos[0]===200){
+            console.log(detalle_factura[1])
+            console.log(historicos[1])
+            this.setState({
+                modalLoading:false
+            })
+            this.props.navigation.navigate('DetalleFacturacion', {
+                data: detalle_factura[1],
+                data2: historicos[1]
+              });
+        }
+        
+        
+    }
     
     renderItem = ({item}) =>{
         
         return(
         <TouchableOpacity 
+        onPress={()=>{
+            this.goToDetallesFacturación(item)
+        }}
         >
         <View style={[{backgroundColor:"white",padding:10,marginBottom:5},styles.sombra]}>
-        <View style={{alignSelf:"flex-start",}}>
+        <View style={{flexDirection:"row",}}>
+            <View style={{alignSelf:"flex-start",flex:2}}>
                 
-                    <Text style={{color:'rgb(99,99,99)',fontWeight:"bold", fontSize:16,}}>{`Medidor #${item.measurerCode}`}</Text>
-                    <Text style={{color:item.color,fontSize:15}}>{`Desviacion ${item.percentage}%`}</Text>
-                
-                
-                
-                <View style={{marginTop:10,marginBottom:10}}>
-                <Text style={{color:'rgb(99,99,99)', fontSize:15,}}>{`${item.message}`}</Text>
-                </View>
-                <View style={{alignSelf:"flex-end"}}>
-                    <Text style={{color:'rgb(133,133,133)',fontSize:12,}}>{`${item.origin} - ${ moment(item.dateNotification.slice(0, 10)).format("MMMM Do YYYY, h:mm:ss a")}`}</Text>
-                </View>
-                <View style={{borderBottomColor: item.color,borderBottomWidth: 1,marginTop:5}}/>
-            
+                <Text style={{color:'rgb(99,99,99)',fontWeight:"bold", fontSize:16,}}>{`Nombre Medidor #${item.name}`}</Text>
+                <Text style={{color:'rgb(99,99,99)',fontWeight:"bold", fontSize:16,}}>{`Contrato #${item.contractNumber}`}</Text>
+                            
+            </View>
+            <View style={{alignItems:"flex-end",flex:1}}>
+            <Next name="ios-arrow-forward" size={40} color={Color.primary}/>
+            </View>
         </View>
-    
+
+        
+        <View style={{alignSelf:"flex-start",marginTop:10,marginBottom:5,flexDirection:"row",justifyContent:"center",alignItems:"center"}}>
+                <Energy name="energy" size={25} color="rgb(252,196,12)"/>
+                <Text style={{color:'rgb(99,99,99)', fontSize:15,marginLeft:5}}>{`Activa : ${new Intl.NumberFormat().format(item.reading.totalConsumption)} kWh`}</Text>
+        </View>  
+        <View style={{alignSelf:"flex-start",marginTop:10,marginBottom:5,flexDirection:"row",justifyContent:"center",alignItems:"center"}}>
+                <Energy name="energy" size={25} color="rgb(252,196,12)"/>
+                <Text style={{color:'rgb(99,99,99)', fontSize:15,marginLeft:5}}>{`Reactiva : ${new Intl.NumberFormat().format(item.reading.totalConsumptionReactive)} kVArh`}</Text>
+        </View>  
+        <View style={{alignSelf:"flex-start",marginTop:10,marginBottom:5,flexDirection:"row",justifyContent:"center",alignItems:"center"}}>
+                <Date name="date-range" size={25} color={Color.blue}/>
+                <Text style={{color:'rgb(99,99,99)', fontSize:15,marginLeft:5}}>{`Fecha ultima toma : ${item.reading.lastRecord.slice(0,10)}`}</Text>
+        </View>
+        <View style={{alignSelf:"flex-start",marginTop:10,marginBottom:5,flexDirection:"row",justifyContent:"center",alignItems:"center"}}>
+                <Value name="dot-single" size={25} color="#900"/>
+                <Text style={{color:'rgb(99,99,99)', fontSize:15,marginLeft:5}}>{`Valor ultima toma : ${item.reading.lastValue}`}</Text>
+        </View>
+        <View style={{alignSelf:"flex-start",marginTop:10,marginBottom:5,flexDirection:"row",justifyContent:"center",alignItems:"center"}}>
+                <Location name="location" size={30} color={Color.green}/>
+                <Text style={{color:'rgb(99,99,99)', fontSize:15,marginLeft:5}}>{`${item.address}`}</Text>
+        </View>  
         </View>
         </TouchableOpacity>
         )
@@ -106,7 +158,7 @@ import moment from "moment";
                     searchBar:true
                 })}  
                 ></CustomHeader>
-                <Content contentContainerStyle={{flex:1,padding:5
+                <Content contentContainerStyle={{flex:1,padding:10
                 }}
                 >
                 <FlatList
@@ -116,6 +168,7 @@ import moment from "moment";
                             
                         />
                     
+                <Loader loading={this.state.modalLoading} title={"Consultando..."}/>
 
                 
                     
@@ -166,7 +219,7 @@ const styles = StyleSheet.create({
         //backgroundColor: '#fff', 
         elevation: 2,
         borderWidth: 1,
-        borderRadius: 2,
+        borderRadius: 4,
         borderColor: '#ddd',
         borderBottomWidth: 0,
         /* shadowColor: '#000',
