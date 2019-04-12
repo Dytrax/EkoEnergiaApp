@@ -8,6 +8,9 @@ import API from  '../../../utils/requests/apiRequests'
 import Date from 'react-native-vector-icons/MaterialIcons';
 import Location from 'react-native-vector-icons/EvilIcons';
 import Energy from 'react-native-vector-icons/SimpleLineIcons';
+import Grafica from 'react-native-vector-icons/Entypo';
+import Folder from 'react-native-vector-icons/Entypo';
+
 import Next from 'react-native-vector-icons/Ionicons';
 import Value from 'react-native-vector-icons/Entypo';
 import Loader from '../loader'
@@ -37,8 +40,7 @@ import moment from "moment";
         this.setState({data:results})
     
       }
-      
-     
+    
     
     
 
@@ -69,15 +71,20 @@ import moment from "moment";
           });
     }
    
-
+    graficaConsumoDiario = () => {
+        const id = this.props.navigation.getParam('id', 'NO-ID')
+        this.props.navigation.navigate('GraficaConsumoDiario', {
+            id: id,
+            
+          });
+    }
     
    
     render(){
         const { navigation } = this.props;
         const detalleFacturacion = navigation.getParam('data', 'NO-DATA');
-        const historicos = navigation.getParam('data2', 'NO-DATA');
-        console.log("Facturacion")
-        console.log(detalleFacturacion)
+        
+        
         
         return ( 
             <Container style={{backgroundColor:"rgb(255,255,255)"}}>
@@ -146,15 +153,30 @@ import moment from "moment";
                 </View>
                 <View style={[{backgroundColor:"white",padding:10,marginBottom:10},styles.sombra]}>
                     <Text style={{color:'rgb(99,99,99)',fontWeight:"bold", fontSize:17,}}>{`Saldo A Pagar`}</Text>
-                    <Text style={{color:'rgb(99,99,99)',fontSize:15,marginTop:5}}>{`${new Intl.NumberFormat().format(historicos.data[0].valorCancelado)}`}</Text>
+                    <Text style={{color:'rgb(99,99,99)',fontSize:15,marginTop:5}}>{`${detalleFacturacion.data[0].valorFactura.toLocaleString('de-ES')}`}</Text>
 
 
                 </View>
                 <TouchableOpacity style={[{backgroundColor:"white",padding:10,marginBottom:5,
                 flexDirection:"row",alignItems:"center",
                 justifyContent:"center"},styles.sombra]} onPress={()=>{this.historicosFacturas()}}>
+                    <Folder name="folder" size={25} color={Color.primary} style={{marginRight:10}}/>
                     <View style={{flex:2,}}>
                         <Text style={{color:'rgb(99,99,99)',fontWeight:"bold", fontSize:17}}>{`Histórico De Facturas`}</Text>
+
+                        
+                                    
+                    </View>
+                    <View style={{alignItems:"flex-end",flex:1}}>
+                    <Next name="ios-arrow-forward" size={40} color={Color.primary}/>
+                    </View>
+                </TouchableOpacity>
+                <TouchableOpacity style={[{backgroundColor:"white",padding:10,marginBottom:5,
+                flexDirection:"row",alignItems:"center",
+                justifyContent:"center"},styles.sombra]} onPress={()=>{this.graficaConsumoDiario()}}>
+                    <Grafica  name="line-graph" size={25} color={Color.primary} style={{marginRight:10}}/>
+                    <View style={{flex:2,}}>
+                        <Text style={{color:'rgb(99,99,99)',fontWeight:"bold", fontSize:17}}>{`Grafica Consumo Diario`}</Text>
 
                         
                                     

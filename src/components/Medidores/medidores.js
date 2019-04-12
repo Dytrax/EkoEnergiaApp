@@ -64,6 +64,7 @@ import moment from "moment";
         })
         let detalle_factura = await API.getDetalleFacturacion(item.contractNumber)
         let historicos = await API.getHistoricos(item.contractNumber)
+    
         if (detalle_factura[0]===200 && historicos[0]===200){
             console.log(detalle_factura[1])
             console.log(historicos[1])
@@ -72,7 +73,8 @@ import moment from "moment";
             })
             this.props.navigation.navigate('DetalleFacturacion', {
                 data: detalle_factura[1],
-                data2: historicos[1]
+                data2: historicos[1],
+                id:this.state.data[0].id
               });
         }
         
@@ -103,11 +105,11 @@ import moment from "moment";
         
         <View style={{alignSelf:"flex-start",marginTop:10,marginBottom:5,flexDirection:"row",justifyContent:"center",alignItems:"center"}}>
                 <Energy name="energy" size={25} color="rgb(252,196,12)"/>
-                <Text style={{color:'rgb(99,99,99)', fontSize:15,marginLeft:5}}>{`Activa : ${new Intl.NumberFormat().format(item.reading.totalConsumption)} kWh`}</Text>
+                <Text style={{color:'rgb(99,99,99)', fontSize:15,marginLeft:5}}>{`Activa : ${item.reading.totalConsumption.toLocaleString('de-DE',{maximumSignificantDigits:8})} kWh`}</Text>
         </View>  
         <View style={{alignSelf:"flex-start",marginTop:10,marginBottom:5,flexDirection:"row",justifyContent:"center",alignItems:"center"}}>
-                <Energy name="energy" size={25} color="rgb(252,196,12)"/>
-                <Text style={{color:'rgb(99,99,99)', fontSize:15,marginLeft:5}}>{`Reactiva : ${new Intl.NumberFormat().format(item.reading.totalConsumptionReactive)} kVArh`}</Text>
+                <Energy name="energy" size={25} color={Color.second}/>
+                <Text style={{color:'rgb(99,99,99)', fontSize:15,marginLeft:5}}>{`Reactiva : ${item.reading.totalConsumptionReactive.toLocaleString('de-DE',{maximumSignificantDigits:8})} kVArh`}</Text>
         </View>  
         <View style={{alignSelf:"flex-start",marginTop:10,marginBottom:5,flexDirection:"row",justifyContent:"center",alignItems:"center"}}>
                 <Date name="date-range" size={25} color={Color.blue}/>
@@ -115,7 +117,7 @@ import moment from "moment";
         </View>
         <View style={{alignSelf:"flex-start",marginTop:10,marginBottom:5,flexDirection:"row",justifyContent:"center",alignItems:"center"}}>
                 <Value name="dot-single" size={25} color="#900"/>
-                <Text style={{color:'rgb(99,99,99)', fontSize:15,marginLeft:5}}>{`Valor ultima toma : ${item.reading.lastValue}`}</Text>
+                <Text style={{color:'rgb(99,99,99)', fontSize:15,marginLeft:5}}>{`Valor ultima toma : ${item.reading.lastValue.toLocaleString('de-DE',{maximumSignificantDigits:4})}`}</Text>
         </View>
         <View style={{alignSelf:"flex-start",marginTop:10,marginBottom:5,flexDirection:"row",justifyContent:"center",alignItems:"center"}}>
                 <Location name="location" size={30} color={Color.green}/>

@@ -1,4 +1,7 @@
 import { createDrawerNavigator} from "react-navigation";
+import {
+  Dimensions
+} from 'react-native'
 import SideMenu from '../src/components/sideMenu'
 import SolicitudesRoot from './Solicitudes/Root'
 import NotificacionesRoot from './Notificaciones/RootNotificaciones'
@@ -7,6 +10,7 @@ import TarifasAplicadas from '../src/components/Reportes/tarifasAplicadas'
 import MedidoresRoot from './Medidores/RootMedidores'
 import graficaEjemploUno from '../src/components/Indicadores/Indicadores'
 import GraficaDos from "../src/components/Indicadores/graficados";
+const WIDTH = Dimensions.get('window').width
 const MyDrawer = createDrawerNavigator({
   Solicitudes:{
     screen:SolicitudesRoot
@@ -44,7 +48,9 @@ const MyDrawer = createDrawerNavigator({
   
 },{
   contentComponent:SideMenu,
-  useNativeAnimations:true
+  useNativeAnimations:true,
+  drawerWidth:WIDTH-56
+  
 }
 );
 

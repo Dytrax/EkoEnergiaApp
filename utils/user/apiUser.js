@@ -19,7 +19,7 @@ class apiUser{
                 email: email,//correo
                 password: password,
                 
-                //agua es 1 energia 2
+                //agua es 1 energia 2 
             })
           })
           let responseJson = await query.json()
@@ -53,7 +53,14 @@ class apiUser{
       } 
   }///ekosave-api/v1/configuration-image/1:id_empresa
   
-  
+  arrayBufferToBase64 = (buffer) =>{
+    var binary = '';
+  var bytes = [].slice.call(new Uint8Array(buffer));
+
+  bytes.forEach((b) => binary += String.fromCharCode(b));
+
+  return window.btoa(binary);
+  }
   async imgUser(company){
     try{
         const query = await fetch(URL_IMAGE+company ,{  
@@ -62,12 +69,15 @@ class apiUser{
                                     'Accept': 'application/json',
                                     'Content-Type': 'application/json',
                                   },
-                                  body: JSON.stringify({
-                                  })
-                                })
-        let responseJson = await query.json()
-        
-        return [ query.status,responseJson]
+                                  
+                                }).then((response) => {
+                                  response.arrayBuffer().then((buffer) => {
+                                    var base64Flag = 'data:image/jpeg;base64,';
+                                    var imageStr = this.arrayBufferToBase64(buffer);
+                                
+                                    document.querySelector('img').src = base64Flag + imageStr;
+                                  });
+                                });
 
     }catch(error){
       console.error(error)

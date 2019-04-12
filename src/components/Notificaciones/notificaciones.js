@@ -6,7 +6,12 @@ import CustomHeader from '../layouts/CustomHeader'
 import Color from '../../../config/color'
 import API from  '../../../utils/requests/apiRequests'
 import moment from 'moment' 
+import CalendarIcon from 'react-native-vector-icons/AntDesign';
+
 import Bell from 'react-native-vector-icons/MaterialCommunityIcons';
+import CloseIcon from 'react-native-vector-icons/EvilIcons';
+import * as actions from '../../actionsCreators/actions'
+import {connect} from 'react-redux'
 
 var localLocale = moment();
 moment.locale('es');
@@ -30,22 +35,47 @@ moment.locale('es');
         if (results.length <= 0){
             results = this.state.copyData
         }
-        this.setState({data:results})
+        this.setState({data:results,
+            })
     
       }
       
-    async componentDidMount(){
+     componentDidMount = async () =>{
+        
         var notificacionesData = await API.getListNotificaciones()
         console.log(notificacionesData)
         if (notificacionesData[0]==200){
+            this.props.setDate({
+                data:notificacionesData[1],
+            })
             this.setState({
-                data:notificacionesData[1]
+                data:notificacionesData[1],
+                copyData:notificacionesData[1]
             })
         }
         
     }
 
-    
+    filtrar = () => {
+        /* this.props.setDate({
+            data:this.state.data
+        }) */
+        this.props.navigation.navigate('Calendar',{
+            data:this.state.data
+        });
+        /* console.log(this.state.data)
+        let filtroData = this.state.data.filter(n=>n.dateNotification.slice(0, 10)==="2019-01-25")
+        console.log(filtroData)
+        this.setState({
+            data:filtroData
+        }) */
+    }
+    eliminarFiltro = () => {
+        this.props.setDate({
+            data:this.state.copyData,
+        })
+        
+    }
     
 
     renderItem = ({item}) =>{
@@ -69,7 +99,7 @@ moment.locale('es');
                 <Bell name="bell-ring-outline" size={25} color="white"/>
                 <View>
                      <Text style={{color:"white",fontSize:14,marginLeft:10, fontWeight:"900"}}>{`Desviación  ${Math.trunc(item.percentage)} %`}</Text>
-                    <Text style={{color:"white",fontSize:14,marginLeft:10, fontWeight:"900"}}>{`${ moment(item.dateNotification.slice(0, 10)).format("MMMM DD YYYY, h:mm:ss a")}`}</Text>
+                    <Text style={{color:"white",fontSize:14,marginLeft:10, fontWeight:"900"}}>{`${ moment(item.dateNotification).utc().format("MMMM DD YYYY, h:mm:ss a")}`}</Text>
                 </View>
             </View>
         <View style={{alignSelf:"flex-start",padding:10,}}>
@@ -123,13 +153,40 @@ moment.locale('es');
                     searchBar:true
                 })}  
                 ></CustomHeader>
-                <Content contentContainerStyle={{flex:1,padding:10,paddingTop:5,marginBottom:5
+                <Content scrollEnabled={false} contentContainerStyle={{flex:1,padding:10,paddingTop:5,marginBottom:5
                 }}
                 >
+                    <View style={[{padding:10,flexDirection:"row",marginBottom:10,marginTop:10,backgroundColor:"white"},styles.sombra]}>
+                        <View style={{flex:1}}>
+                            <CalendarIcon name="calendar" size={25} color={Color.second} onPress={()=>{this.filtrar()}}/>
+
+                        </View>
+                        <View style={{flex:5,justifyContent:"center",alignItems:"center"}}>
+                            <Text >{this.props.date.date}</Text>
+                        </View>
+                        
+                        <View style={{flex:1,alignSelf:"flex-end"}}>
+                            <CloseIcon name="close" size={25} color={Color.second} onPress={()=>{this.eliminarFiltro()}}/>
+
+                        </View>
+
+                    </View>
+                    <ScrollView style={{flex:1,width:'100%',marginBottom:10}}> 
                     
-                    <ScrollView style={{flex:1,width:'100%',}}> 
+                    {/* <TouchableOpacity onPress={()=>{this.filtrar()}}>
+                        <View>
+                            <Text>FILTRAR</Text>
+                           
+                        </View>
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={()=>{this.eliminarFiltro()}}>
+                        <View>
+                            <Text>ELIMINAR FILTRO</Text>
+                        </View>
+                    </TouchableOpacity> */}
+                        
                         <FlatList
-                            data={this.state.data}
+                            data={this.props.date.data}
                             renderItem={this.renderItem}
                             keyExtractor={item => item.id.toString()}
                             
@@ -195,5 +252,10 @@ const styles = StyleSheet.create({
         elevation: 1, */
     }
 })
-export default Notificaciones
 
+const mapStateToProps = state => {
+    return {
+        date : state.calendar,
+    }
+}
+export default connect(mapStateToProps,actions)(Notificaciones);

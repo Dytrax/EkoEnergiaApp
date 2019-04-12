@@ -59,7 +59,7 @@ import moment from "moment";
                 </View>
                                         
                 <View style={{flex:1}}>
-                    <Text style={{color:'rgb(99,99,99)', fontSize:16,alignSelf:"flex-end"}}>{`${new Intl.NumberFormat().format(item.consumo)} kWh`}</Text>
+                    <Text style={{color:'rgb(99,99,99)', fontSize:16,alignSelf:"flex-end"}}>{`${item.consumo.toLocaleString('de-DE',{maximumSignificantDigits:8})} kWh`}</Text>
                 </View>
                                                                 
                                     {/* <Text style={{color:Color.red,fontSize:15}}>{`Desviacion `}</Text> */}                           
@@ -70,7 +70,7 @@ import moment from "moment";
                 </View>
                                         
                 <View style={{flex:1}}>
-                    <Text style={{color:'rgb(99,99,99)', fontSize:16,alignSelf:"flex-end"}}>{`$ ${new Intl.NumberFormat().format(item.valorEnergia)} `}</Text>
+                    <Text style={{color:'rgb(99,99,99)', fontSize:16,alignSelf:"flex-end"}}>{`$ ${item.valorEnergia.toLocaleString('de-DE',{maximumSignificantDigits:8})} `}</Text>
                 </View>
                                                                 
                                     {/* <Text style={{color:Color.red,fontSize:15}}>{`Desviacion `}</Text> */}                           
@@ -81,7 +81,7 @@ import moment from "moment";
                 </View>
                                         
                 <View style={{flex:1}}>
-                    <Text style={{color:'rgb(99,99,99)', fontSize:16,alignSelf:"flex-end"}}>{`$ ${new Intl.NumberFormat().format(item.valorCancelado)}`}</Text>
+                    <Text style={{color:'rgb(99,99,99)', fontSize:16,alignSelf:"flex-end"}}>{`$ ${item.valorCancelado.toLocaleString('de-DE',{maximumSignificantDigits:8})}`}</Text>
                 </View>
                                                                 
                                     {/* <Text style={{color:Color.red,fontSize:15}}>{`Desviacion `}</Text> */}                           

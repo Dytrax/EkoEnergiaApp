@@ -23,4 +23,13 @@ export const setMedidor = medidor => ({
   payload: medidor,
 });
   
+export const setDate = date => ({
+  type: 'SET_DATE',
+  payload: date,
+});
+
+export const setDateGraficaMedidores = date => ({
+  type: 'SET_DATE',
+  payload: date,
+});
   

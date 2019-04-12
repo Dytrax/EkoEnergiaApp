@@ -9,6 +9,8 @@ const URL_MEDIDORES = `${CONFIG.URL_BASE}:${CONFIG.PORT_7001}/${CONFIG.VERSION_A
 const URL_TARIFAS_APLICADAS = `${CONFIG.URL_BASE}:${CONFIG.PORT_7001}/${CONFIG.VERSION_API_EKOSAVE}/clients/data-empresa?`
 const URL_DETALLE_FACTURACION = `${CONFIG.URL_BASE}:${CONFIG.PORT_7001}/${CONFIG.VERSION_API_EKOSAVE}/clients/data-empresa?`
 const URL_HISTORICOS = `${CONFIG.URL_BASE}:${CONFIG.PORT_7001}/${CONFIG.VERSION_API_EKOSAVE}/clients/data-empresa?`
+const URL_INDICADORES_GRAFICOS = `${CONFIG.URL_BASE}:${CONFIG.PORT_7001}/${CONFIG.VERSION_API_EKOSAVE}/data/dashboard`
+const URL_CONSUMO_DIARIO_GRAFICA = `${CONFIG.URL_BASE}:${CONFIG.PORT_7001}/${CONFIG.VERSION_API_EKOSAVE}/clients/measurers/data/`
 
 class apiRequests{
 
@@ -228,6 +230,51 @@ class apiRequests{
       console.error(error)
     } 
   }
+
+
+  async getDatosIndicadoresGraficos(){
+    try{
+    
+    const query = await fetch(URL_INDICADORES_GRAFICOS ,{  
+          method: 'GET', 
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization':'Bearer '+ await DB.getData('token'),
+          },
+        
+        })
+        let responseJson = await query.json()
+        return [ query.status,responseJson]
+
+    }catch(error){
+      console.error(error)
+    } 
+  }
+
+
+
+  async getConsumoDiarioGrafica(id,dateInit,dateEnd){
+    try{
+    
+    const query = await fetch( URL_CONSUMO_DIARIO_GRAFICA+id+"/"+dateInit+"/"+dateEnd+"?startTime=undefined&endTime=undefined&day=undefined",{  
+          method: 'GET', 
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization':'Bearer '+ await DB.getData('token'),
+          },
+        
+        })
+        let responseJson = await query.json()
+        return [ query.status,responseJson]
+
+    }catch(error){
+      console.error(error)
+    } 
+  }
 }
+
+
 
 export default new apiRequests()

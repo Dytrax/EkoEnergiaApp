@@ -75,8 +75,9 @@ class Login extends Component {
           });
         await DB.store("token", user[1].token)
         await DB.store("email", user[1].user.email)
-        
-        console.log(user[1])
+        await DB.store("name", user[1].user.name)
+        await DB.store("uriImg", Config.Base_api_usuairo_img+user[1].user.companyId.toString())
+       
         console.log(Config.Base_api_usuairo_img+user[1].user.companyId)
         this.props.setUser(user[1])
         this.props.navigation.navigate("Menu");

@@ -76,20 +76,17 @@ import LinearGradient from 'react-native-linear-gradient';
                 >
                     
                     <ScrollView style={{flex:1,width:'100%',}}> 
-                    <LinearGradient
-                        
-                        colors={['#FFF', '#FFF']}
-                        start={{x: 0.0, y: 1.0}} end={{x: 1.0, y: 1.0}}
-                        style={[styles.sombra,{marginBottom:10,}]}
+                    <View
+                        style={{marginBottom:10,}}
 
                         > 
-                            <View style={{flexDirection:"row",flex:1,borderWidth:1,borderColor:"#EC8623",padding:10,marginBottom:5}}>
+                            <View style={{flexDirection:"row",flex:1,borderWidth:1,borderColor:"#EC8623",padding:10,marginBottom:5,borderRadius: 6,}}>
                                         <View style={{flex:1,alignSelf:"flex-start"}}>
-                                            <Text style={{color:Color.primary,fontWeight:"bold", fontSize:16,}}>Consumo kWh</Text>
+                                            <Text style={{color:"#EC8623",fontWeight:"bold", fontSize:16,}}>Consumo kWh</Text>
                                         </View>
                                         
                                         <View style={{flex:1}}>
-                                            <Text style={{color:"black",fontWeight:"bold", fontSize:16,alignSelf:"flex-end"}}>{`${new Intl.NumberFormat().format(dataTA.consumo)}`}</Text>
+                                            <Text style={{color:"rgb(133,133,133)",fontWeight:"bold", fontSize:16,alignSelf:"flex-end"}}>{`${dataTA.consumo.toLocaleString('de-DE',{maximumSignificantDigits:4})}`}</Text>
                                         </View>
                                         
                                         {/* <Text style={{color:Color.red,fontSize:15}}>{`Desviacion `}</Text> */}                           
@@ -99,31 +96,30 @@ import LinearGradient from 'react-native-linear-gradient';
                        
                        
                     
-                    </LinearGradient>
+                        </View>
 
-                    <LinearGradient
-                        colors={['#FFF', '#FFF']}
-                        start={{x: 0.0, y: 1.0}} end={{x: 1.0, y: 1.0}}
-                        style={[styles.sombra,{marginBottom:10,}]}
+                    <View
+                        style={{marginBottom:10,}}
+
                         > 
 
                     
-                        <View style={[{padding:10,marginBottom:5,borderWidth:1,borderColor:'#33C1D7',}]}>
+                        <View style={[{padding:10,marginBottom:5,borderWidth:1,borderColor:'#4E4E4E',borderRadius: 6,}]}>
                         
                                 
-                                    <Text style={{color:'#33C1D7',fontWeight:"bold", fontSize:16,}}>Generación y comercialización</Text>
+                                    <Text style={{color:'#4E4E4E',fontWeight:"bold", fontSize:16,}}>Generación y comercialización</Text>
                                     {/* <Text style={{color:Color.red,fontSize:15}}>{`Desviacion `}</Text> */}
                                 
                                 
                                 
                                 <View style={{flexDirection:"row",marginTop:10}}>
                                     <View style={{justifyContent:"center",alignItems:"center",flex:1,}}>
-                                        <Text style={{color:"black",fontWeight:"800"}}>{`$${new Intl.NumberFormat().format(dataTA.compra)}`}</Text>
-                                        <Text style={{color:'#33C1D7',fontWeight:"800"}}>Tarifa</Text>
+                                        <Text style={{color:"rgb(133,133,133)",fontWeight:"800"}}>{`$${dataTA.compra.toLocaleString('de-DE',{maximumSignificantDigits:4})}`}</Text>
+                                        <Text style={{color:'#4E4E4E',fontWeight:"800"}}>Tarifa</Text>
                                     </View>
                                     <View style={{justifyContent:"center",alignItems:"center",flex:1}}>
-                                        <Text style={{color:"black",fontWeight:"800"}}>{`$${new Intl.NumberFormat().format(dataTA.tComponenteG)}`}</Text>
-                                        <Text style={{color:'#33C1D7',fontWeight:"800"}}>Total</Text>
+                                        <Text style={{color:"rgb(133,133,133)",fontWeight:"800"}}>{`$${dataTA.tComponenteG.toLocaleString('de-DE',{maximumSignificantDigits:7})}`}</Text>
+                                        <Text style={{color:'#4E4E4E',fontWeight:"800"}}>Total</Text>
                                     </View>
                                 </View>
                                
@@ -131,91 +127,87 @@ import LinearGradient from 'react-native-linear-gradient';
                         
                     
                         </View>
-                    </LinearGradient>
-                    <LinearGradient
-                        colors={['#FFF', '#FFF', '#FFF']}
-                        start={{x: 0.0, y: 1.0}} end={{x: 1.0, y: 1.0}}
-                        style={[styles.sombra,{marginBottom:10}]}
+                        </View>
+                        <View
+                        style={{marginBottom:10,}}
+
                         > 
-                        <View style={[{padding:10,marginBottom:5,borderWidth:1,borderColor:"#EC8623"}]}>
+                        <View style={[{padding:10,marginBottom:5,borderWidth:1,borderColor:"#EC8623",borderRadius: 6,}]}>
                                 
-                                    <Text style={{color:'white',fontWeight:"bold", fontSize:16,}}>Transmision</Text>
+                                    <Text style={{color:"#EC8623",fontWeight:"bold", fontSize:16,}}>Transmision</Text>
                                 <View style={{flexDirection:"row",marginTop:10}}>
                                     <View style={{justifyContent:"center",alignItems:"center",flex:1,}}>
-                                        <Text style={{color:"white",fontWeight:"800"}}>{`$${new Intl.NumberFormat().format(dataTA.transmision)}`}</Text>
-                                        <Text style={{color:"white",fontWeight:"800"}}>Tarifa</Text>
+                                        <Text style={{color:"rgb(133,133,133)",fontWeight:"800"}}>{`$${dataTA.transmision.toLocaleString('de-DE',{maximumSignificantDigits:4})}`}</Text>
+                                        <Text style={{color:"#EC8623",fontWeight:"800"}}>Tarifa</Text>
                                     </View>
                                     <View style={{justifyContent:"center",alignItems:"center",flex:1}}>
-                                        <Text style={{color:"white",fontWeight:"800"}}>{`$${new Intl.NumberFormat().format(dataTA.tComponenteT)}`}</Text>
-                                        <Text style={{color:"white",fontWeight:"800"}}>Valor</Text>
+                                        <Text style={{color:"rgb(133,133,133)",fontWeight:"800"}}>{`$${dataTA.tComponenteT.toLocaleString('de-DE',{maximumSignificantDigits:7})}`}</Text>
+                                        <Text style={{color:"#EC8623",fontWeight:"800"}}>Valor</Text>
                                     </View>
                                 </View>
                                
                         </View>
-                    </LinearGradient>
-                    <LinearGradient
-                        colors={['#00ADF9', '#00ADF9', '#00ADF9']}
-                        start={{x: 0.0, y: 1.0}} end={{x: 1.0, y: 1.0}}
-                        style={[styles.sombra,{marginBottom:10}]}
+                        </View>
+                        <View
+                        style={{marginBottom:10,}}
+
                         > 
-                        <View style={[{padding:10,marginBottom:5}]}>
+                        <View style={[{padding:10,marginBottom:5,borderWidth:1,borderColor:'#4E4E4E',borderRadius: 6,}]}>
                                 
-                                    <Text style={{color:'white',fontWeight:"bold", fontSize:16,}}>Perdidas</Text>
+                                    <Text style={{color:'#4E4E4E',fontWeight:"bold", fontSize:16,}}>Perdidas</Text>
                                 <View style={{flexDirection:"row",marginTop:10}}>
                                     <View style={{justifyContent:"center",alignItems:"center",flex:1,}}>
-                                        <Text style={{color:"white",fontWeight:"800"}}>{`$${new Intl.NumberFormat().format(dataTA.componentePR)}`}</Text>
-                                        <Text style={{color:"white",fontWeight:"800"}}>Tarifa</Text>
+                                        <Text style={{color:"rgb(133,133,133)",fontWeight:"800"}}>{`$${dataTA.componentePR.toLocaleString('de-DE',{maximumSignificantDigits:4})}`}</Text>
+                                        <Text style={{color:'#4E4E4E',fontWeight:"800"}}>Tarifa</Text>
                                     </View>
                                     <View style={{justifyContent:"center",alignItems:"center",flex:1}}>
-                                        <Text style={{color:"white",fontWeight:"800"}}>{`$${new Intl.NumberFormat().format(dataTA.tComponentePR)}`}</Text>
-                                        <Text style={{color:"white",fontWeight:"800"}}>Valor</Text>
+                                        <Text style={{color:"rgb(133,133,133)",fontWeight:"800"}}>{`$${dataTA.tComponentePR.toLocaleString('de-DE',{maximumSignificantDigits:7})}`}</Text>
+                                        <Text style={{color:'#4E4E4E',fontWeight:"800"}}>Valor</Text>
                                     </View>
                                 </View>
                                
                         </View>
-                    </LinearGradient>
-                    <LinearGradient
-                        colors={['#46BFBD', '#46BFBD', '#46BFBD']}
-                        start={{x: 0.0, y: 1.0}} end={{x: 1.0, y: 1.0}}
-                        style={[styles.sombra,{marginBottom:10}]}
+                        </View>
+                        <View
+                        style={{marginBottom:10,}}
+
                         > 
-                        <View style={[{padding:10,marginBottom:5}]}>
+                        <View style={[{padding:10,marginBottom:5,borderWidth:1,borderColor:"#EC8623",borderRadius: 6,}]}>
                                 
-                                    <Text style={{color:'white',fontWeight:"bold", fontSize:16,}}>Restricciones</Text>
+                                    <Text style={{color:"#EC8623",fontWeight:"bold", fontSize:16,}}>Restricciones</Text>
                                 <View style={{flexDirection:"row",marginTop:10}}>
                                     <View style={{justifyContent:"center",alignItems:"center",flex:1,}}>
-                                        <Text style={{color:"white",fontWeight:"800"}}>{`$${new Intl.NumberFormat().format(dataTA.componenteR)}`}</Text>
-                                        <Text style={{color:"white",fontWeight:"800"}}>Tarifa</Text>
+                                        <Text style={{color:"rgb(133,133,133)",fontWeight:"800"}}>{`$${dataTA.componenteR.toLocaleString('de-DE',{maximumSignificantDigits:4})}`}</Text>
+                                        <Text style={{color:"#EC8623",fontWeight:"800"}}>Tarifa</Text>
                                     </View>
                                     <View style={{justifyContent:"center",alignItems:"center",flex:1}}>
-                                        <Text style={{color:"white",fontWeight:"800"}}>{`$${new Intl.NumberFormat().format(dataTA.tComponenteR)}`}</Text>
-                                        <Text style={{color:"white",fontWeight:"800"}}>Valor</Text>
+                                        <Text style={{color:"rgb(133,133,133)",fontWeight:"800"}}>{`$${dataTA.tComponenteR.toLocaleString('de-DE',{maximumSignificantDigits:7})}`}</Text>
+                                        <Text style={{color:"#EC8623",fontWeight:"800"}}>Valor</Text>
                                     </View>
                                 </View>
                                
                         </View>
-                    </LinearGradient>
-                    <LinearGradient
-                        colors={['#F0A517', '#F0A517', '#F1BC59']}
-                        start={{x: 0.0, y: 1.0}} end={{x: 1.0, y: 1.0}}
-                        style={[styles.sombra,{marginBottom:10}]}
+                        </View>
+                        <View
+                        style={{marginBottom:10,}}
+
                         > 
-                        <View style={[{padding:10,marginBottom:5}]}>
+                        <View style={[{padding:10,marginBottom:5,borderWidth:1,borderColor:'#4E4E4E',borderRadius: 6,}]}>
                                 
-                                    <Text style={{color:'white',fontWeight:"bold", fontSize:16,}}>Distribucion</Text>
+                                    <Text style={{color:'#4E4E4E',fontWeight:"bold", fontSize:16,}}>Distribucion</Text>
                                 <View style={{flexDirection:"row",marginTop:10}}>
                                     <View style={{justifyContent:"center",alignItems:"center",flex:1,}}>
-                                        <Text style={{color:"white",fontWeight:"800"}}>{`$${new Intl.NumberFormat().format(dataTA.distribucion)}`}</Text>
-                                        <Text style={{color:"white",fontWeight:"800"}}>Tarifa</Text>
+                                        <Text style={{color:"rgb(133,133,133)",fontWeight:"800"}}>{`$${dataTA.distribucion.toLocaleString('de-DE',{maximumSignificantDigits:4})}`}</Text>
+                                        <Text style={{color:'#4E4E4E',fontWeight:"800"}}>Tarifa</Text>
                                     </View>
                                     <View style={{justifyContent:"center",alignItems:"center",flex:1}}>
-                                        <Text style={{color:"white",fontWeight:"800"}}>{`$${new Intl.NumberFormat().format(dataTA.tComponenteD)}`}</Text>
-                                        <Text style={{color:"white",fontWeight:"800"}}>Valor</Text>
+                                        <Text style={{color:"rgb(133,133,133)",fontWeight:"800"}}>{`$${dataTA.tComponenteD.toLocaleString('de-DE',{ maximumSignificantDigits:7})}`}</Text>
+                                        <Text style={{color:'#4E4E4E',fontWeight:"800"}}>Valor</Text>
                                     </View>
                                 </View>
                                
                         </View>
-                    </LinearGradient>
+                        </View>
 
 
                         

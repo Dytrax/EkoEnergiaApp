@@ -4,6 +4,8 @@ import user from './userLoginReducer'
 import typeSolicitud from './userSolicitudReducer'
 import contrato from './userSolicitudContratoReducer'
 import medidor from './userMedidorTFreducer'
+import calendar from './calendarReducer'
+import calendarConsumoDiario from './calendarGraficaReducer'
 const data = [
     {
         "superhero":"Batman", 
@@ -151,5 +153,7 @@ export default combineReducers({
     user ,
     typeSolicitud,
     contrato,
-    medidor
+    medidor,
+    calendar,
+    calendarConsumoDiario
 })
