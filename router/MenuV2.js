@@ -10,6 +10,7 @@ import TarifasAplicadas from '../src/components/Reportes/tarifasAplicadas'
 import MedidoresRoot from './Medidores/RootMedidores'
 import graficaEjemploUno from '../src/components/Indicadores/Indicadores'
 import GraficaDos from "../src/components/Indicadores/graficados";
+import ReportesGraficasRoot from './ReportesGraficas/rootReporteGraficas'
 const WIDTH = Dimensions.get('window').width
 const MyDrawer = createDrawerNavigator({
   Solicitudes:{
@@ -29,6 +30,9 @@ const MyDrawer = createDrawerNavigator({
   },
   EjemploGraficaDos:{
     screen:GraficaDos
+  },
+  ReportesGraficas:{
+    screen:ReportesGraficasRoot
   }
 
   /* Solicitudes2:{

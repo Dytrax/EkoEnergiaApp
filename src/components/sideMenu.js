@@ -14,6 +14,7 @@ import Factura from "react-native-vector-icons/Ionicons";
 import Notificaciones from "react-native-vector-icons/Ionicons";
 import Medidores from "react-native-vector-icons/Entypo";
 import SolicitudesIcon from "react-native-vector-icons/MaterialIcons";
+import ReportesIcon from "react-native-vector-icons/MaterialIcons";
 import Fondo from '../../src/assents/img/icon_menu/imgSideMenu.jpg'
 import Color from '../../config/color'
 import ImageLogo from '../../src/assents/img/logo.png'
@@ -164,6 +165,27 @@ class SideMenu extends Component {
                                     </View>
                                 
                                 </View>
+                            </TouchableHighlight>
+
+                            <TouchableHighlight style={[styles.tabTouchableStyle,]}
+                                onPress={() => {this.controlTabNavigator('ReportesGraficas', 6)}}
+                                underlayColor = {Color.underlayColorTab}
+                            >   
+                                <View style={{padding:6}}>
+                                    <View style={[styles.tabContainerOff, this.state.dashboardTab===6 && styles.tabContainer]}>
+                                            <View style={{width:"20%",  marginLeft:40}}>
+                                                <ReportesIcon name={"data-usage"} size={22} 
+                                                //style={{alignSelf:"center"}}
+                                                    //color={Color.primary}
+                                                    style={[styles.offIcon, this.state.dashboardTab===6 && styles.onIcon]}
+                                                />
+                                            </View>
+                                            <View style={{width:"80%", }}>
+                                                <Text style={[{fontSize:16,fontWeight:"bold",},[styles.offIcon, this.state.dashboardTab===6 && styles.onIcon]]} >Reportes</Text>
+                                            </View>
+                                    </View>
+                             
+                                </View> 
                             </TouchableHighlight>
                             
                             <TouchableHighlight style={[styles.tabTouchableStyle,]}

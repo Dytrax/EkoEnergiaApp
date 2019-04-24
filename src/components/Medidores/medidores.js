@@ -8,6 +8,7 @@ import API from  '../../../utils/requests/apiRequests'
 import Date from 'react-native-vector-icons/MaterialIcons';
 import Location from 'react-native-vector-icons/EvilIcons';
 import Energy from 'react-native-vector-icons/SimpleLineIcons';
+
 import Next from 'react-native-vector-icons/Ionicons';
 import Value from 'react-native-vector-icons/Entypo';
 import Loader from '../loader'

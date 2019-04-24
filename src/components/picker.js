@@ -54,81 +54,201 @@ class Picker extends Component {
                     </View>
 
                     <View style={{flexDirection:"row",flex:1,}}>
-                        <TouchableOpacity onPress={()=>{this.props.stateChange("selectMonth",1)
-                        this.props.setVisibleModal(false)
-                        this.props.stateChange("fecha",true)}}
-                        style={{margin:10}}>
-                            <Text style={[styles.offText, this.props.selectMonth===1 && styles.onText] }>Ene</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity onPress={()=>{this.props.stateChange("selectMonth",2)
-                        this.props.setVisibleModal(false)
-                        this.props.stateChange("fecha",true)}}
-                        style={{margin:10}}>
-                            <Text style={[styles.offText, this.props.selectMonth===2 && styles.onText] }>Feb</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity onPress={()=>{this.props.stateChange("selectMonth",3)
-                        this.props.setVisibleModal(false)
-                        this.props.stateChange("fecha",true)}}
-                        style={{margin:10}}>
-                            <Text style={[styles.offText, this.props.selectMonth===3 && styles.onText] }>Mar</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity onPress={()=>{this.props.stateChange("selectMonth",4)
-                        this.props.setVisibleModal(false)
-                        this.props.stateChange("fecha",true)}}
-                        style={{margin:10}}>
-                            <Text style={[styles.offText, this.props.selectMonth===4 && styles.onText] }>Abr</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity onPress={()=>{this.props.stateChange("selectMonth",5)
-                        this.props.setVisibleModal(false)
-                        this.props.stateChange("fecha",true)}}
-                        style={{margin:10}}>
-                            <Text style={[styles.offText, this.props.selectMonth===5 && styles.onText] }>May</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity onPress={()=>{this.props.stateChange("selectMonth",6)
+                        {
+                            this.props.binaryMonthList[0] ? (
+                                <TouchableOpacity onPress={()=>{this.props.stateChange("selectMonth",1)
+                                this.props.setVisibleModal(false)
+                                this.props.stateChange("fecha",true)}}
+                                style={{margin:10}}>
+                                    <Text style={[styles.offText, this.props.selectMonth===1 && styles.onText] }>Ene</Text>
+                                </TouchableOpacity>
+                            ) : (
+                                <TouchableOpacity 
+                                style={{margin:10}}>
+                                    <Text style={{color:"grey"}}>Ene</Text>
+                                </TouchableOpacity>
+                            )
+                        }
+                        {
+                            this.props.binaryMonthList[1] ? (
+                                <TouchableOpacity onPress={()=>{this.props.stateChange("selectMonth",2)
+                                this.props.setVisibleModal(false)
+                                this.props.stateChange("fecha",true)}}
+                                style={{margin:10}}>
+                                    <Text style={[styles.offText, this.props.selectMonth===2 && styles.onText] }>Feb</Text>
+                                </TouchableOpacity>
+                            ) : (
+                                <TouchableOpacity 
+                                style={{margin:10}}>
+                                    <Text style={{color:"grey"}}>Feb</Text>
+                                </TouchableOpacity>
+                            )
+                        }
+                        {
+                            this.props.binaryMonthList[2] ? (
+                                <TouchableOpacity onPress={()=>{this.props.stateChange("selectMonth",3)
+                                this.props.setVisibleModal(false)
+                                this.props.stateChange("fecha",true)}}
+                                style={{margin:10}}>
+                                    <Text style={[styles.offText, this.props.selectMonth===3 && styles.onText] }>Mar</Text>
+                                </TouchableOpacity>
+                            ) : (
+                                <TouchableOpacity 
+                                style={{margin:10}}>
+                                    <Text style={{color:"grey"}}>Mar</Text>
+                                </TouchableOpacity>
+                            )
+                        }
+                        {
+                            this.props.binaryMonthList[3] ? (
+                                <TouchableOpacity onPress={()=>{this.props.stateChange("selectMonth",4)
+                                this.props.setVisibleModal(false)
+                                this.props.stateChange("fecha",true)}}
+                                style={{margin:10}}>
+                                    <Text style={[styles.offText, this.props.selectMonth===4 && styles.onText] }>Abr</Text>
+                                </TouchableOpacity>
+                            ) : (
+                                <TouchableOpacity 
+                                style={{margin:10}}>
+                                    <Text style={{color:"grey"}}>Abr</Text>
+                                </TouchableOpacity>
+                            )
+                        }
+                        
+                        {
+                            this.props.binaryMonthList[4] ? (
+                                <TouchableOpacity onPress={()=>{this.props.stateChange("selectMonth",5)
+                                this.props.setVisibleModal(false)
+                                this.props.stateChange("fecha",true)}}
+                                style={{margin:10}}>
+                                    <Text style={[styles.offText, this.props.selectMonth===5 && styles.onText] }>May</Text>
+                                </TouchableOpacity>
+                            ) : (
+                                <TouchableOpacity 
+                                style={{margin:10}}>
+                                    <Text style={{color:"grey"}}>May</Text>
+                                </TouchableOpacity>
+                            )
+                        }
+                        
+                        {
+                            this.props.binaryMonthList[5] ? (
+                                <TouchableOpacity onPress={()=>{this.props.stateChange("selectMonth",6)
                         this.props.setVisibleModal(false)
                         this.props.stateChange("fecha",true)}}
                         style={{margin:10}}>
                             <Text style={[styles.offText, this.props.selectMonth===6 && styles.onText] }>Jun</Text>
                         </TouchableOpacity>
+                            ) : (
+                                <TouchableOpacity 
+                                style={{margin:10}}>
+                                    <Text style={{color:"grey"}}>Jun</Text>
+                                </TouchableOpacity>
+                            )
+                        }
+                        
+                        
 
                     </View>
                     <View style={{flexDirection:"row",flex:1}}>
-                        <TouchableOpacity onPress={()=>{this.props.stateChange("selectMonth",7)
+
+                        {
+                            this.props.binaryMonthList[6] ? (
+                                <TouchableOpacity onPress={()=>{this.props.stateChange("selectMonth",7)
                         this.props.setVisibleModal(false)
                         this.props.stateChange("fecha",true)}}
                         style={{margin:10}}>
                             <Text style={[styles.offText, this.props.selectMonth===7 && styles.onText] }>Jul</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity onPress={()=>{this.props.stateChange("selectMonth",8)
+                            ) : (
+                                <TouchableOpacity 
+                                style={{margin:10}}>
+                                    <Text style={{color:"grey"}}>Jul</Text>
+                                </TouchableOpacity>
+                            )
+                        }
+
+                        {
+                            this.props.binaryMonthList[7] ? (
+                                <TouchableOpacity onPress={()=>{this.props.stateChange("selectMonth",8)
                         this.props.setVisibleModal(false)
                         this.props.stateChange("fecha",true)}}                        
                         style={{margin:10}}>
                             <Text style={[styles.offText, this.props.selectMonth===8 && styles.onText] }>Ago</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity onPress={()=>{this.props.stateChange("selectMonth",9)
+                            ) : (
+                                <TouchableOpacity 
+                                style={{margin:10}}>
+                                    <Text style={{color:"grey"}}>Ago</Text>
+                                </TouchableOpacity>
+                            )
+                        }
+                        
+                        {
+                            this.props.binaryMonthList[8] ? (
+                                <TouchableOpacity onPress={()=>{this.props.stateChange("selectMonth",9)
                         this.props.setVisibleModal(false)
                         this.props.stateChange("fecha",true)}}
                         style={{margin:10}}>
                             <Text style={[styles.offText, this.props.selectMonth===9 && styles.onText] }>Sep</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity onPress={()=>{this.props.stateChange("selectMonth",10)
+                            ) : (
+                                <TouchableOpacity 
+                                style={{margin:10}}>
+                                    <Text style={{color:"grey"}}>Sep</Text>
+                                </TouchableOpacity>
+                            )
+                        }
+                        
+                        {
+                            this.props.binaryMonthList[9] ? (
+                                <TouchableOpacity onPress={()=>{this.props.stateChange("selectMonth",10)
                         this.props.setVisibleModal(false)
                         this.props.stateChange("fecha",true)}}
                         style={{margin:10}}>
                             <Text style={[styles.offText, this.props.selectMonth===10 && styles.onText] }>Oct</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity onPress={()=>{this.props.stateChange("selectMonth",11)
+                            ) : (
+                                <TouchableOpacity 
+                                style={{margin:10}}>
+                                    <Text style={{color:"grey"}}>Oct</Text>
+                                </TouchableOpacity>
+                            )
+                        }
+
+                        {
+                            this.props.binaryMonthList[10] ? (
+                                <TouchableOpacity onPress={()=>{this.props.stateChange("selectMonth",11)
                         this.props.setVisibleModal(false)
                         this.props.stateChange("fecha",true)}}
                         style={{margin:10}}>
                             <Text style={[styles.offText, this.props.selectMonth===11 && styles.onText] }>Nov</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity onPress={()=>{this.props.stateChange("selectMonth",12)
+                            ) : (
+                                <TouchableOpacity 
+                                style={{margin:10}}>
+                                    <Text style={{color:"grey"}}>Nov</Text>
+                                </TouchableOpacity>
+                            )
+                        }
+                        
+                        {
+                            this.props.binaryMonthList[11] ? (
+                                <TouchableOpacity onPress={()=>{this.props.stateChange("selectMonth",12)
                        this.props.setVisibleModal(false)
                         this.props.stateChange("fecha",true)}}
                         style={{margin:10}}>
                             <Text style={[styles.offText, this.props.selectMonth===12 && styles.onText] }>Dec</Text>
                         </TouchableOpacity>
+                            ) : (
+                                <TouchableOpacity 
+                                style={{margin:10}}>
+                                    <Text style={{color:"grey"}}>Dec</Text>
+                                </TouchableOpacity>
+                            )
+                        }
+                        
+                        
 
                     </View>
                   

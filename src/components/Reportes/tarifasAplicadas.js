@@ -25,6 +25,7 @@ const meses = {
     11:"Noviembre",
     12:"Diciembre"
 }
+const list_number_months = [1,2,3,4,5,6,7,8,9,10,11,12]
  class TarifasAplicadas extends Component{
     
     constructor(){
@@ -39,6 +40,7 @@ const meses = {
             medidores:"",
             fecha:false,
             modalLoading:false,
+            lista_binaria_meses:[]
         }
         this._handleResults = this._handleResults.bind(this);
         
@@ -56,21 +58,35 @@ const meses = {
       
      componentDidMount = async () =>{
         let medidores = await API.getListMedidores()
+        var actual_month = moment().month() + 1;
+        var lista_binaria_meses = []
+        for (i in list_number_months) {
+            if (list_number_months[i] <= actual_month){
+                lista_binaria_meses[i] = true
+            }else{
+                lista_binaria_meses[i] = false
+            }
+        }
         console.log("Data Medidores")
         console.log(medidores)
         medidores = medidores[1].map(s=>{
             return {
                 id:s.id,
                 name:s.name,
-                contract:s.contract.number
+                contract:s.contract.number,
+                
             }
         })
+        
+        
         console.log("Data Medidores 2")
         console.log(medidores)
         var year2 = moment().year();
         this.setState({
             year:year2,
-            medidores:medidores
+            medidores:medidores,
+            lista_binaria_meses:lista_binaria_meses,
+            copy_lista_binaria_meses:lista_binaria_meses
         })
     
     }
@@ -101,11 +117,37 @@ const meses = {
         console.log('using javascript :',year3);
     }
     addYear = () =>{
+        var actual_year = moment().year();
+        if (actual_year != this.state.year + 1) {
+            var lista_binaria_meses = [true,true,true,true,true,true,true,true,true,true,true,true]
+            this.setState({
+                lista_binaria_meses: lista_binaria_meses
+            })
+        }else{
+            this.setState({
+                lista_binaria_meses:this.state.copy_lista_binaria_meses
+    
+            })
+    
+        }
         this.setState({
             year:this.state.year+1
         })
     }
     removeYear = () =>{
+        var actual_year = moment().year();
+        if (actual_year != this.state.year - 1) {
+            var lista_binaria_meses = [true,true,true,true,true,true,true,true,true,true,true,true]
+            this.setState({
+                lista_binaria_meses: lista_binaria_meses
+            })
+        }else{
+            this.setState({
+                lista_binaria_meses:this.state.copy_lista_binaria_meses
+    
+            })
+    
+        }
         this.setState({
             year:this.state.year-1
         })
@@ -242,6 +284,7 @@ const meses = {
                         <PickerModal modal={this.state.modal} stateChange={this.stateChange}
                             setVisibleModal={this.setVisibleModal} selectMonth={this.state.selectMonth}
                             year={this.state.year} addYear={this.addYear} removeYear={this.removeYear}
+                            binaryMonthList={this.state.lista_binaria_meses}
                         />
                         <Loader loading={this.state.modalLoading} title={"Consultando..."}/>
                         

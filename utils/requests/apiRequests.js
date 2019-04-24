@@ -11,6 +11,7 @@ const URL_DETALLE_FACTURACION = `${CONFIG.URL_BASE}:${CONFIG.PORT_7001}/${CONFIG
 const URL_HISTORICOS = `${CONFIG.URL_BASE}:${CONFIG.PORT_7001}/${CONFIG.VERSION_API_EKOSAVE}/clients/data-empresa?`
 const URL_INDICADORES_GRAFICOS = `${CONFIG.URL_BASE}:${CONFIG.PORT_7001}/${CONFIG.VERSION_API_EKOSAVE}/data/dashboard`
 const URL_CONSUMO_DIARIO_GRAFICA = `${CONFIG.URL_BASE}:${CONFIG.PORT_7001}/${CONFIG.VERSION_API_EKOSAVE}/clients/measurers/data/`
+const URL_DATOS_REPORTES_GRAFICAS = `${CONFIG.URL_BASE}:${CONFIG.PORT_7001}/${CONFIG.VERSION_API_EKOSAVE}/clients/reports/daily`
 
 class apiRequests{
 
@@ -273,7 +274,44 @@ class apiRequests{
       console.error(error)
     } 
   }
+
+
+  async getDatosGraficasReportes(fecha_fin,fecha_inicio,id_medidor){
+
+   
+    try{
+     
+          const query = await fetch( URL_DATOS_REPORTES_GRAFICAS,{  
+          method: 'POST', 
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization':'Bearer '+ await DB.getData('token'),
+          },
+          body: JSON.stringify({
+            fecha_fin:fecha_fin,
+            fecha_inicio:fecha_inicio,
+            id_medidor:id_medidor,
+            
+            
+            
+            
+          })
+      
+        })
+        let responseJson = await query.json()
+        console.log(query.status)
+        return [ query.status,responseJson]
+
+    }catch(error){
+      console.error(error)
+    } 
+  }
+
+
 }
+
+
 
 
 
